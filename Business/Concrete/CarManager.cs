@@ -19,11 +19,20 @@ namespace Business.Concrete
 
         public void Add(Car car)
         {
-            if (car.CarName.Length>=2 && car.DailyPrice > 0)
+            if (car.CarName.Length<2)
+            {
+                throw new Exception("Araba ismi minimum 2 harf olmalı");
+                
+            }
+            else if(car.DailyPrice <= 0)
+            {
+                throw new Exception("Araba fiyatı 0'dan büyük olmalı");
+            }
+            else
             {
                 _carDal.Add(car);
                 Console.WriteLine("Araba listeye eklendi.");
-            }            
+            }
             
         }
 
