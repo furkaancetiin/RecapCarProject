@@ -11,6 +11,229 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+
+            ICarService carService = new CarManager(new EfCarDal());
+            IColorService colorService = new ColorManager(new EfColorDal());
+            IBrandService brandService = new BrandManager(new EfBrandDal());
+            IUserService userService = new UserManager(new EfUserDal());
+            ICustomerService customerService = new CustomerManager(new EfCustomerDal());
+            IRentalService rentalService = new RentalManager(new EfRentalDal());
+            //CarAdd(carService);
+            //CarUpdate(carService);
+            //CarDelete(carService);
+            //CarGetAll(carService);
+            //GetCarsByColorIdTest(carService);
+            //GetCarsByBrandIdTest(carService);
+            //CarGetById(carService);
+            //GetCarDetailsTest(carService);
+            //ColorAdd(colorService);
+            //ColorDelete(colorService);
+            //ColorUpdate(colorService);
+            //ColorGetAll(colorService);
+            //BrandAdd(brandService);
+            //BrandDelete(brandService);
+            //BrandUpdate(brandService);
+            //BrandGetAll(brandService);            
+            //UserAdd(userService);
+            //CustomerAdd(customerService);
+            //RentalAdd(rentalService);
+
+        }
+
+        private static void RentalAdd(IRentalService rentalService)
+        {
+            Rental rental1 = new Rental { CarId = 1, CustomerId = 1, RentDate = new DateTime(2022, 02, 05) };
+            rentalService.Add(rental1);
+        }
+
+        private static void CustomerAdd(ICustomerService customerService)
+        {
+            Customer customer1 = new Customer
+            {
+                CompanyName = "Anfa",
+                UserId = 1
+            };
+
+            Customer customer2 = new Customer
+            {
+                CompanyName = "İstiklal Rezidans",
+                UserId = 2
+            };
+
+            Customer customer3 = new Customer
+            {
+                CompanyName = "Lazzoni",
+                UserId = 3
+            };
+
+            customerService.Add(customer1);
+        }
+
+        private static void UserAdd(IUserService userService)
+        {
+            User user2 = new User
+            {
+                Email = "tevfikbayram@gmail.com",
+                FirstName = "Tevfik",
+                LastName = "Bayram",
+                Password = "123456",
+            };
+
+            User user3 = new User
+            {
+                Email = "mehmetgungor@gmail.com",
+                FirstName = "Mehmet",
+                LastName = "Güngör",
+                Password = "123456",
+            };
+
+            userService.Add(user2);
+        }
+
+        private static void GetCarDetailsTest(ICarService carService)
+        {
+            foreach (var car in carService.GetCarDetails().Data)
+            {
+                Console.WriteLine(car.BrandName + " " + car.CarName + " " + car.ColorName);
+            }
+        }
+
+        private static void BrandGetAll(IBrandService brandService)
+        {
+            foreach (var brand in brandService.GetAll().Data)
+            {
+                Console.WriteLine(brand.BrandName);
+            }
+        }
+
+        private static void BrandUpdate(IBrandService brandService)
+        {
+            brandService.Update(new Brand { BrandId = 2, BrandName = "Z" });
+        }
+
+        private static void BrandDelete(IBrandService brandService)
+        {
+            brandService.Delete(new Brand { BrandId = 3, BrandName = "M" });
+        }
+
+        private static void BrandAdd(IBrandService brandService)
+        {
+            Brand brand1 = new Brand
+            {
+                BrandName = "F"
+            };
+
+            Brand brand2 = new Brand
+            {
+                BrandName = "T"
+            };
+
+            Brand brand3 = new Brand
+            {
+                BrandName = "M"
+            };
+
+            brandService.Add(brand1);
+        }
+
+        private static void ColorGetAll(IColorService colorService)
+        {
+            foreach (var color in colorService.GetAll().Data)
+            {
+                Console.WriteLine(color.ColorName);
+            }
+        }
+
+        private static void ColorUpdate(IColorService colorService)
+        {
+            colorService.Update(new Color { ColorId = 2, ColorName = "Mavi" });
+        }
+
+        private static void ColorDelete(IColorService colorService)
+        {
+            colorService.Delete(new Color { ColorId = 3, ColorName = "Mavi" });
+        }
+
+        private static void ColorAdd(IColorService colorService)
+        {
+            Color color1 = new Color
+            {
+                ColorName = "Kırmızı"
+            };
+
+            Color color2 = new Color
+            {
+                ColorName = "Yeşil"
+            };
+
+            Color color3 = new Color
+            {
+                ColorName = "Mavi"
+            };
+
+
+            colorService.Add(color1);
+        }
+
+        private static void CarGetById(ICarService carService)
+        {
+            Console.WriteLine(carService.GetById(1).Data.CarName);
+        }
+
+        private static void GetCarsByBrandIdTest(ICarService carService)
+        {
+            foreach (var car in carService.GetCarsByBrandId(2).Data)
+            {
+                Console.WriteLine(car.CarName);
+            }
+        }
+
+        private static void GetCarsByColorIdTest(ICarService carService)
+        {
+            foreach (var car in carService.GetCarsByColorId(2).Data)
+            {
+                Console.WriteLine(car.CarName);
+            }
+        }
+
+        private static void CarGetAll(ICarService carService)
+        {
+            foreach (var car in carService.GetAll().Data)
+            {
+                Console.WriteLine(car.CarName);
+            }
+        }
+
+        private static void CarDelete(ICarService carService)
+        {
+            carService.Delete(new Car
+            {
+                CarId = 2,
+                BrandId = 2,
+                CarName = "Nissan",
+                ColorId = 2,
+                DailyPrice = 200,
+                Description = "Maximum Sürat = 190 km / saat",
+                ModelYear = 2019
+            });
+        }
+
+        private static void CarUpdate(ICarService carService)
+        {
+            carService.Update(new Car
+            {
+                CarId = 1,
+                BrandId = 1,
+                CarName = "Ferrari",
+                ColorId = 2,
+                DailyPrice = 300,
+                Description = "Maximum Sürat = 270 km / saat",
+                ModelYear = 2021
+            });
+        }
+
+        private static ICarService CarAdd(ICarService carService)
+        {
             Car car1 = new Car
             {
                 BrandId = 1,
@@ -31,108 +254,9 @@ namespace ConsoleUI
                 ModelYear = 2019
             };
 
-            ICarService carService = new CarManager(new EfCarDal());
-            //carService.Add(car1);
-            //carService.Add(car2);
-            //carService.Update(new Car {
-            //    CarId=1,
-            //    BrandId = 1,
-            //    CarName = "Ferrari",
-            //    ColorId = 2,
-            //    DailyPrice = 300,
-            //    Description = "Maximum Sürat = 270 km / saat",
-            //    ModelYear = 2021
-            //});
-
-            //carService.Delete(new Car
-            //{
-            //    CarId = 2,
-            //    BrandId = 2,
-            //    CarName = "Nissan",
-            //    ColorId = 2,
-            //    DailyPrice = 200,
-            //    Description = "Maximum Sürat = 190 km / saat",
-            //    ModelYear = 2019
-            //});
-
-            //foreach (var car in carService.GetAll())
-            //{
-            //    Console.WriteLine(car.CarName);
-            //}
-
-            //foreach (var car in carService.GetCarsByColorId(2))
-            //{
-            //    Console.WriteLine(car.CarName);
-            //}
-
-            //foreach (var car in carService.GetCarsByBrandId(2))
-            //{
-            //    Console.WriteLine(car.CarName);
-            //}
-
-            Console.WriteLine(carService.GetById(1).CarName);
-
-            Color color1 = new Color
-            {                
-                ColorName = "Kırmızı"
-            };
-
-            Color color2 = new Color
-            {
-                ColorName = "Yeşil"
-            };
-
-            Color color3 = new Color
-            {
-                ColorName = "Mavi"
-            };
-
-            IColorService colorService = new ColorManager(new EfColorDal());
-            //colorService.Add(color1);
-            //colorService.Add(color2);
-            //colorService.Add(color3);
-
-            //colorService.Delete(new Color { ColorId = 3, ColorName = "Mavi" });
-            //colorService.Update(new Color { ColorId = 2, ColorName = "Mavi" });
-
-            //foreach (var color in colorService.GetAll())
-            //{
-            //    Console.WriteLine(color.ColorName);
-            //}                       
-
-            IBrandService brandService = new BrandManager(new EfBrandDal());
-            Brand brand1 = new Brand
-            {
-                BrandName = "F"
-            };
-
-            Brand brand2 = new Brand
-            {
-                BrandName = "T"
-            };
-
-            Brand brand3 = new Brand
-            {
-                BrandName = "M"
-            };
-
-            //brandService.Add(brand1);
-            //brandService.Add(brand2);
-            //brandService.Add(brand3);
-
-            //brandService.Delete(new Brand { BrandId = 3, BrandName = "M" });
-            //brandService.Update(new Brand { BrandId = 2, BrandName = "Z" });
-
-            //foreach (var brand in brandService.GetAll())
-            //{
-            //    Console.WriteLine(brand.BrandName);
-            //}
-
-            //foreach (var car in carService.GetCarDetails())
-            //{
-            //    Console.WriteLine(car.BrandName + " "+ car.CarName + " " + car.ColorName);
-            //}            
-
+            
+            carService.Add(car1);
+            return carService;
         }
     }
 }
