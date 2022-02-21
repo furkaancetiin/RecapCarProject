@@ -1,9 +1,13 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,25 +22,12 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
 
-            if (car.CarName.Length <= 2)
-            {
-                return new ErrorResult(Messages.CarNameInvalid);
-
-            }
-            else if (car.DailyPrice <= 0)
-            {
-                return new ErrorResult(Messages.CarPriceInvalid);
-            }
-            else
-            {
-                _carDal.Add(car);
-                return new SuccessResult();
-            }           
-
+            _carDal.Add(car);
+            return new SuccessResult();
         }
 
         public IResult Delete(Car car)
@@ -47,7 +38,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll()
         {
-            if (DateTime.Now.Hour==01)
+            if (DateTime.Now.Hour == 01)
             {
                 return new ErrorDataResult<List<Car>>(_carDal.GetAll(), Messages.CarMaintenanceTime);
             }
@@ -59,8 +50,8 @@ namespace Business.Concrete
 
         public IDataResult<Car> GetById(int carId)
         {
-           return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == carId));
-            
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == carId));
+
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
@@ -80,20 +71,10 @@ namespace Business.Concrete
 
         public IResult Update(Car car)
         {
-            if (car.CarName.Length < 2)
-            {
-                return new ErrorResult(Messages.CarNameInvalid);
 
-            }
-            else if (car.DailyPrice <= 0)
-            {
-                return new ErrorResult(Messages.CarPriceInvalid);
-            }
-            else
-            {
-                _carDal.Update(car);
-                return new SuccessResult();
-            }
+            _carDal.Update(car);
+            return new SuccessResult();
+
         }
     }
 }

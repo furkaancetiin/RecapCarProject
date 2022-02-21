@@ -30,7 +30,7 @@ namespace DataAccess.Concrete.InMemory
 
         public void Delete(Car car)
         {
-            Car deleteFromCarList = _cars.SingleOrDefault(c => c.CarId == car.CarId);
+            Car deleteFromCarList = _cars.SingleOrDefault(c => c.Id == car.Id);
             _cars.Remove(deleteFromCarList);
         }
 
@@ -51,7 +51,7 @@ namespace DataAccess.Concrete.InMemory
 
         public void Update(Car car)
         {
-            Car updateToCarList = _cars.SingleOrDefault(c => c.CarId == car.CarId);
+            Car updateToCarList = _cars.SingleOrDefault(c => c.Id == car.Id);
             updateToCarList.ModelYear = car.ModelYear;
             updateToCarList.ColorId = car.ColorId;
             updateToCarList.Description = car.Description;

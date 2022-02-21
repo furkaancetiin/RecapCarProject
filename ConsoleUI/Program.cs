@@ -208,7 +208,7 @@ namespace ConsoleUI
         {
             carService.Delete(new Car
             {
-                CarId = 2,
+                Id = 2,
                 BrandId = 2,
                 CarName = "Nissan",
                 ColorId = 2,
@@ -222,7 +222,7 @@ namespace ConsoleUI
         {
             carService.Update(new Car
             {
-                CarId = 1,
+                Id = 1,
                 BrandId = 1,
                 CarName = "Ferrari",
                 ColorId = 2,
