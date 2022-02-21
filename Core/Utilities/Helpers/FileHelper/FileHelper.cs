@@ -7,25 +7,14 @@ using System.Text;
 namespace Core.Utilities.Helpers.FileHelper
 {
     public class FileHelper
-    {
-        /// <summary>
-        /// Resim, video vb şeyleri silmeye yarayan metod.
-        /// </summary>
-        /// <param name="filePath">Silenecek olan dosyanın yolu</param>
+    {        
         public static void Delete(string filePath)
         {
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
             }
-        }
-        /// <summary>
-        /// Bir dosyayı diğer bir dosya ile değiştirmeye yarayan fonksiyon.
-        /// </summary>
-        /// <param name="file">Yeni resim, video veya başka bir dosya.</param>
-        /// <param name="filePath">Eski dosyanın yolu.</param>
-        /// <param name="root">Yeni dosyanın kaydedileceği ana dizin.</param>
-        /// <returns></returns>
+        }       
         public static string Update(IFormFile file, string filePath, string root)
         {
             Delete(filePath);
