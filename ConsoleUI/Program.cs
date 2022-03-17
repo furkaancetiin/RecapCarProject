@@ -14,8 +14,7 @@ namespace ConsoleUI
 
             ICarService carService = new CarManager(new EfCarDal());
             IColorService colorService = new ColorManager(new EfColorDal());
-            IBrandService brandService = new BrandManager(new EfBrandDal());
-            IUserService userService = new UserManager(new EfUserDal());
+            IBrandService brandService = new BrandManager(new EfBrandDal());            
             ICustomerService customerService = new CustomerManager(new EfCustomerDal());
             IRentalService rentalService = new RentalManager(new EfRentalDal());
             //CarAdd(carService);
@@ -68,27 +67,10 @@ namespace ConsoleUI
 
             customerService.Add(customer1);
         }
+        
 
-        private static void UserAdd(IUserService userService)
-        {
-            User user2 = new User
-            {
-                Email = "tevfikbayram@gmail.com",
-                FirstName = "Tevfik",
-                LastName = "Bayram",
-                Password = "123456",
-            };
-
-            User user3 = new User
-            {
-                Email = "mehmetgungor@gmail.com",
-                FirstName = "Mehmet",
-                LastName = "Güngör",
-                Password = "123456",
-            };
-
-            userService.Add(user2);
-        }
+            
+        
 
         private static void GetCarDetailsTest(ICarService carService)
         {
