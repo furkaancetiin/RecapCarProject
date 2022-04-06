@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -21,5 +22,13 @@ namespace Business.Constants
         public static string SuccessfulLogin = "Başarıyla giriş yapıldı.";
         public static string UserAlreadyExists ="Kullanıcı zaten mevcut bulunmaktadır.";
         public static string AccessTokenCreated = "Token oluşturuldu.";
+        public static string CarNotAvailable = "Araba kiralanmış";
+        public static string PaymentSuccessful = "Ödeme işlemi başarılı";
+        public static string RentalSuccessful = "Kiralama işlemi başarılı";
+        public static string CreditCardNotValid = "Kredi kartı mevcut değil";
+        public static string StringMustConsistOfNumbersOnly = "Lütfen yalnızca sayı kullanınız.";
+        public static string CustomerCreditCardIsAvailable = "Kredi kartınız sistem kayıtlıdır.";
+
+        public static List<CreditCard> CreditCardIsNotValidInSaved { get; internal set; }
     }
 }

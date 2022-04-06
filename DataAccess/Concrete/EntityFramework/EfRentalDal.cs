@@ -6,34 +6,32 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace DataAccess.Concrete.EntityFramework
 {
     public class EfRentalDal : EfEntityRepositoryBase<Rental, RentACarContext>, IRentalDal
     {
-        public List<RentalDetailDto> GetRentalDetails()
+        public List<RentalDetailDto> GetRentalDetails(Expression<Func<RentalDetailDto, bool>> filter=null)
         {
             using (RentACarContext context = new RentACarContext())
             {
                 var result = from r in context.Rentals
                              join c in context.Cars
-                             on r.CarId equals c.Id
-                             join b in context.Brands
-                             on c.BrandId equals b.BrandId
-                             join cr in context.Customers
-                             on r.CustomerId equals cr.CustomerId
-                             join u in context.Users
-                             on cr.UserId equals u.Id
+                             on r.CarId equals c.Id                             
+                             join cr in context.CarImages
+                             on r.CarId equals cr.CarId
                              select new RentalDetailDto
-                             {
-                                 BrandName = b.BrandName,
-                                 FirstName = u.FirstName,
-                                 LastName = u.LastName,
-                                 RentDate = r.RentDate,
-                                 ReturnDate = r.ReturnDate
+                             {                                 
+                                 CarId=c.Id,                                 
+                                 ImagePath=cr.ImagePath,
+                                 CarName=c.CarName,
+                                 DailyPrice=c.DailyPrice,                                
                              };
 
-                return result.ToList();              
+                return filter == null
+                     ? result.ToList()
+                     : result.Where(filter).ToList();
             }
         }
     }

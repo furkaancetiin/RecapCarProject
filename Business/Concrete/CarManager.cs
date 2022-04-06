@@ -48,7 +48,7 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
-            if (DateTime.Now.Hour == 01)
+            if (DateTime.Now.Hour == 05)
             {
                 return new ErrorDataResult<List<Car>>(_carDal.GetAll(), Messages.CarMaintenanceTime);
             }
@@ -80,14 +80,14 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(b => b.BrandId == brandId));
         }
 
-        public IDataResult<List<Car>> GetFilteredCarsById(int brandId, int colorId)
+        public IDataResult<List<CarDetailDto>> GetFilteredCarsById(int brandId, int colorId)
         {
             if (brandId != 0 && colorId != 0)
             {
-                return new SuccessDataResult<List<Car>>(_carDal.GetAll(x => x.BrandId == brandId && x.ColorId == colorId));
+                return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(x => x.BrandId == brandId && x.ColorId == colorId));
             }
 
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(x => x.BrandId == brandId || x.ColorId == colorId));
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(x => x.BrandId == brandId || x.ColorId == colorId));
         }
 
         public IDataResult<List<Car>> GetCarsByColorId(int colorId)
@@ -102,6 +102,16 @@ namespace Business.Concrete
             _carDal.Update(car);
             return new SuccessResult();
 
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetailsByBrandId(int brandId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.BrandId == brandId));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetailsByColorId(int colorId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.ColorId == colorId));
         }
     }
 }

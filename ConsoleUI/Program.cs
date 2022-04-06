@@ -15,8 +15,8 @@ namespace ConsoleUI
             ICarService carService = new CarManager(new EfCarDal());
             IColorService colorService = new ColorManager(new EfColorDal());
             IBrandService brandService = new BrandManager(new EfBrandDal());            
-            ICustomerService customerService = new CustomerManager(new EfCustomerDal());
-            IRentalService rentalService = new RentalManager(new EfRentalDal());
+            //ICustomerService customerService = new CustomerManager(new EfCustomerDal());
+            //IRentalService rentalService = new RentalManager(new EfRentalDal());
             //CarAdd(carService);
             //CarUpdate(carService);
             //CarDelete(carService);

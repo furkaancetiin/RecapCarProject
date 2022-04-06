@@ -11,9 +11,11 @@ namespace Business.Concrete
     public class CustomerManager : ICustomerService
     {
         ICustomerDal _customerDal;
+        ICreditCardDal _creditCardDal;
 
-        public CustomerManager(ICustomerDal customerDal)
+        public CustomerManager(ICustomerDal customerDal,ICreditCardDal creditCardDal)
         {
+            _creditCardDal = creditCardDal;
             _customerDal = customerDal;
         }
 
@@ -37,6 +39,11 @@ namespace Business.Concrete
         public IDataResult<Customer> GetById(int customerId)
         {
             return new SuccessDataResult<Customer>(_customerDal.Get(cs => cs.CustomerId == customerId));
+        }       
+
+        public IDataResult<Customer> GetCustomerByUserId(int userId)
+        {
+            return new SuccessDataResult<Customer>(_customerDal.Get(cs => cs.UserId == userId));
         }
 
         public IResult Update(Customer customer)
