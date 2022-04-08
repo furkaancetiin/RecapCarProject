@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Aspects.Autofac.Transaction;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -18,6 +19,7 @@ namespace Business.Concrete
             _paymentDal = paymentDal;
         }
 
+        
         public IDataResult<int> Pay(CreditCard creditCard, int customerId, decimal amount)
         {
             DateTime paymentDate = DateTime.Now;

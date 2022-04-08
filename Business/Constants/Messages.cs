@@ -28,7 +28,7 @@ namespace Business.Constants
         public static string CreditCardNotValid = "Kredi kartı mevcut değil";
         public static string StringMustConsistOfNumbersOnly = "Lütfen yalnızca sayı kullanınız.";
         public static string CustomerCreditCardIsAvailable = "Kredi kartınız sistem kayıtlıdır.";
-
-        public static List<CreditCard> CreditCardIsNotValidInSaved { get; internal set; }
+        public static string CreditCardIsNotValidInSaved = "Kredi kartı kayıtlı kartlarınız arasında mevcut değil.";
+        public static string CarIsNotAvailablePaymentScreen = "Seçtiğiniz tarihler arasında kiralanmış olan araçlar mevcuttur.";
     }
 }

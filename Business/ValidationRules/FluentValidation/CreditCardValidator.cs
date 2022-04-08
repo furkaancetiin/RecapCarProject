@@ -17,9 +17,8 @@ namespace Business.ValidationRules.FluentValidation
             
             RuleFor(c => c.ExpireMonthAndYear).NotEmpty();
             RuleFor(c => c.ExpireMonthAndYear).Length(5);
-            RuleFor(c => c.ExpireMonthAndYear).Must(CheckIfNumberString).WithMessage(Messages.StringMustConsistOfNumbersOnly);           
+            RuleFor(c => c.ExpireMonthAndYear).Must(CheckIfNumberString).WithMessage(Messages.StringMustConsistOfNumbersOnly);     
 
-         
             RuleFor(c => c.Cvc).NotEmpty();
             RuleFor(c => c.Cvc).Length(3);
             RuleFor(c => c.Cvc).Must(CheckIfNumberString).WithMessage(Messages.StringMustConsistOfNumbersOnly);

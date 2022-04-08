@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -17,13 +18,14 @@ namespace Business.Concrete
     {
         IRentalDal _rentalDal;
         ICreditCardService _creditCardService;
-        IPaymentService _paymentService;
+        IPaymentService _paymentService;        
 
         public RentalManager(IRentalDal rentalDal, ICreditCardService creditCardService, IPaymentService paymentService)
         {
             _rentalDal = rentalDal;
             _creditCardService = creditCardService;
             _paymentService = paymentService;
+            
         }
 
         [ValidationAspect(typeof(RentalValidator))]
@@ -52,19 +54,22 @@ namespace Business.Concrete
 
         public IDataResult<Rental> GetRentalDeliveryById(int carId)
         {
-            var result = _rentalDal.Get(r => r.CarId == carId);
+            var getRentalsById = _rentalDal.GetAll(r => r.CarId == carId && r.ReturnDate>=DateTime.Now);
 
-            if (result == null)
+            foreach (var rental in getRentalsById)
             {
-                return new SuccessDataResult<Rental>();
+                if (rental == null)
+                {
+                    return new ErrorDataResult<Rental>();
+                }
+
+                if (rental.RentDate <= DateTime.Now && rental.ReturnDate >= DateTime.Now)
+                {
+                    return new ErrorDataResult<Rental>(Messages.CarNotAvailable);
+                }                
             }
 
-            if (result.RentDate <= DateTime.Now && result.ReturnDate >= DateTime.Now)
-            {
-                return new ErrorDataResult<Rental>(Messages.CarNotAvailable);
-            }
             return new SuccessDataResult<Rental>();
-
         }
 
         public IDataResult<List<RentalDetailDto>> GetRentalDetailsById(int id)
@@ -83,11 +88,15 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        [TransactionScopeAspect]
         public IDataResult<int> Rent(RentPaymentRequestModel rentPaymentRequest)
         {
             var creditCardResult = _creditCardService.Get(rentPaymentRequest.CardNumber, rentPaymentRequest.ExpireMonthAndYear, rentPaymentRequest.Cvc, rentPaymentRequest.CardHolderFullName.ToUpper());
 
-            List<Rental> rentals = new List<Rental>();
+            if (creditCardResult == null)
+            {
+                return new ErrorDataResult<int>(Messages.CreditCardNotValid);
+            }            
 
             var creditCard = creditCardResult.Data;
 
@@ -97,13 +106,29 @@ namespace Business.Concrete
             {
                 rental.PaymentId = paymentResult.Data;
 
+                var getRentalsById = _rentalDal.GetAll(r => r.CarId == rental.CarId && r.ReturnDate >= DateTime.Now);
+
+                foreach (var rentalDb in getRentalsById)
+                {
+                    if (rentalDb == null)
+                    {
+                        return new ErrorDataResult<int>();
+                        
+                    }
+
+                    if (rentalDb.RentDate <= rental.RentDate && rentalDb.ReturnDate <= rental.ReturnDate)
+                    {
+                        return new ErrorDataResult<int>(Messages.CarIsNotAvailablePaymentScreen);
+                    }                    
+                }
+
                 Add(rental);
-
             }
-
+            
             return new SuccessDataResult<int>(paymentResult.Data, Messages.RentalSuccessful);
 
         }
+       
     }
 }
 
