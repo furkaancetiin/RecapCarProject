@@ -81,8 +81,8 @@ namespace Business.Concrete
                 CreditCardId = getCreditCard.Data.Id
             };
 
-            var customerCreditCardExist = _customerCreditCardDal.GetAll(ccc =>
-                ccc.CustomerId == customerCreditCard.CustomerId && ccc.CreditCardId == customerCreditCard.CreditCardId).Any();
+            var customerCreditCardExist = _customerCreditCardDal.GetAll(c =>
+                c.CustomerId == customerCreditCard.CustomerId && c.CreditCardId == customerCreditCard.CreditCardId).Any();
 
             if (customerCreditCardExist)
             {

@@ -1,5 +1,6 @@
 ﻿using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
+using Core.Utilities.Results;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,14 +15,16 @@ namespace Core.Aspects.Autofac.Transaction
             using (TransactionScope transactionScope = new TransactionScope())
             {
                 try
-                {
+                {                   
+
                     invocation.Proceed();
-                    transactionScope.Complete();
+                    transactionScope.Complete();                    
+
                 }
-                catch (System.Exception e)
+                catch(System.Exception)
                 {
                     transactionScope.Dispose();
-                    throw e;
+                    throw;
                 }
             }
         }

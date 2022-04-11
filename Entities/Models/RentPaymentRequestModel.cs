@@ -13,6 +13,7 @@ namespace Entities.Models
         public string CardHolderFullName { get; set; }
         public int CustomerId { get; set; }
         public Rental[] Rentals { get; set; }
+        public SingleFindexPointModel[] FindexScores { get; set; }
         public decimal Amount { get; set; }
     }
 }
