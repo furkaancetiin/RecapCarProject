@@ -13,6 +13,7 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(r => r.RentDate).GreaterThan(DateTime.Now);
             RuleFor(r => r.ReturnDate).GreaterThan(r => r.RentDate);
 
+
         }
     }
 }

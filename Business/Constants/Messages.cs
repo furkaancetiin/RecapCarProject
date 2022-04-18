@@ -27,11 +27,13 @@ namespace Business.Constants
         public static string RentalSuccessful = "Kiralama işlemi başarılı";
         public static string CreditCardNotValid = "Kredi kartı mevcut değil";
         public static string StringMustConsistOfNumbersOnly = "Lütfen yalnızca sayı kullanınız.";
-        public static string CustomerCreditCardIsAvailable = "Kredi kartınız sistem kayıtlıdır.";
+        public static string CustomerCreditCardIsAvailable = "Kayıt etmek istediğiniz kredi kartı zaten sistemde kayıtlı bulunmaktadır";
         public static string CreditCardIsNotValidInSaved = "Kredi kartı kayıtlı kartlarınız arasında mevcut değil.";
         public static string CarIsNotRentable = "Seçtiğiniz tarihler arasında kiralanmış olan araç ya da araçlar mevcuttur.";
         public static string CarFindexPointNotToPair = "Findex puanı uyumsuz olan araçlar var. Lütfen sepetinizi kontrol ediniz.";
         public static string TotalAmountError = "Toplam ödemeniz gereken ücret hatalıdır. Lütfen sepetinizi tekrar gözden geçiriniz.";
         public static string CustomerFindexPointNotEnough = "Findex puanınızın yeterli olmadığı araç(lar) mevcuttur.";
+        public static string BrandAvailable = "Aynı isimde marka zaten mevcuttur.";
+        public static string FindexPointNotAvailable = "Findex puanınız mevcut değil.";
     }
 }

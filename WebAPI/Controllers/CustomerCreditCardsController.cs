@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("getcustomercreditcardbyid")]
+        [HttpPost("savecustomercreditcard")]
         public IActionResult SaveCustomerCreditCard(CustomerCreditCardModel customerCreditCardModel)
         {
             var result = _customerCreditCardService.SaveCustomerCreditCard(customerCreditCardModel);

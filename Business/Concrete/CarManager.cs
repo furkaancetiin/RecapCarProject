@@ -82,6 +82,7 @@ namespace Business.Concrete
 
         public IDataResult<List<CarDetailDto>> GetFilteredCarsById(int brandId, int colorId)
         {
+
             if (brandId != 0 && colorId != 0)
             {
                 return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(x => x.BrandId == brandId && x.ColorId == colorId));

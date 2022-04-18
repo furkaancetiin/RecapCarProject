@@ -53,12 +53,7 @@ namespace Business.Concrete
 
                 }
 
-            }
-
-            if (creditCards.Count == 0)
-            {
-                return new ErrorDataResult<List<CreditCard>>(Messages.CreditCardIsNotValidInSaved);
-            }
+            }           
 
             return new SuccessDataResult<List<CreditCard>>(creditCards);
 

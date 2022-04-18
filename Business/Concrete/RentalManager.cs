@@ -107,7 +107,7 @@ namespace Business.Concrete
 
                 IResult resultCheck = BusinessRules.Run(CheckIfCarIsRentable(rental),
                     CheckIfTotalAmount(rentPaymentRequest.Rentals, rentPaymentRequest.Amount),
-                    CheckIfCustomerFindexPoint(rental.CarId, rentPaymentRequest.CustomerId, rentPaymentRequest.FindexScores));
+                    CheckIfCustomerFindexPoint(rentPaymentRequest.CustomerId, rentPaymentRequest.FindexScores));
 
                 if (resultCheck != null)
                 {
@@ -121,19 +121,26 @@ namespace Business.Concrete
 
         }
 
-        private IResult CheckIfCustomerFindexPoint(int carId, int customerId, SingleFindexPointModel[] findexScores)
-        {
-            var carFindexPointResult = _carService.GetById(carId).Data.FindexScore;
+        private IResult CheckIfCustomerFindexPoint(int customerId, SingleFindexPointModel[] singleFindexPointModels)
+        {             
 
-            var customerFindexPointResult = _findexPointService.GetFindexPointByCustomerId(customerId).Data.FindexScore;
+            var customerFindexPointResult = _findexPointService.GetFindexPointByCustomerId(customerId).Data;
 
-            for (int i = 0; i < findexScores.Length; i++)
+            if (customerFindexPointResult == null)
             {
-                if (carFindexPointResult != findexScores[i].FindexScore)
+                return new ErrorResult(Messages.FindexPointNotAvailable);
+            }
+
+            var customerFindexPoint = customerFindexPointResult.FindexScore;
+
+            for (int i = 0; i < singleFindexPointModels.Length; i++)
+            {
+                
+                if (_carService.GetById(singleFindexPointModels[i].CarId).Data.FindexScore != singleFindexPointModels[i].FindexScore)
                 {
                     return new ErrorResult(Messages.CarFindexPointNotToPair);
                 }
-                if (customerFindexPointResult < findexScores[i].FindexScore)
+                if (customerFindexPoint < singleFindexPointModels[i].FindexScore)
                 {
                     return new ErrorResult(Messages.CustomerFindexPointNotEnough);
                 }
