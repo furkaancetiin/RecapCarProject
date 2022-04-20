@@ -1,3 +1,4 @@
+
 # RecapCarProject
 
 RecapCarProject (RentACar) is a car rental project where I use C# in the Backend and Angular in the Frontend, and I use advanced techniques such as OOP and AOP.
@@ -63,3 +64,8 @@ dotnet ef database update
 |Swashbuckle.AspNetCore.SwaggerGen    | 6.2.3|
 |Microsoft.AspNetCore.Authentication.JwtBearer| 3.1.12|
 |Swashbuckle.AspNetCore.SwaggerUI     | 6.2.3|
+## Associated Project
+The frontend of this project [RecapProjectFrontend](https://github.com/furkaancetiin/RecapCarProjectFrontend)
+## Contributions
+
+Thanks to dear  [Engin Demiroğ](https://github.com/engindemirog)  for his contributions.
