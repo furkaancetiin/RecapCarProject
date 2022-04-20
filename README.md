@@ -8,7 +8,9 @@ RecapCarProject (RentACar) is a car rental project where I use C# in the Backend
 * [Setup](#setup)
 * [Usage](#usage)
 * [Technologies Used](#technologies-used)
-
+* [Associated Project](#associated-project)
+* [Contributions](#contributions)
+* [Contact](#contact)
 ## General Info
 The project consists of 6 layers: Core, Entities, DataAccess, Business, Console UI and WebAPI. Developed with .Net Core 3.1 library.
 ## Setup
@@ -69,3 +71,7 @@ The frontend of this project [RecapProjectFrontend](https://github.com/furkaance
 ## Contributions
 
 Thanks to dear  [Engin Demiroğ](https://github.com/engindemirog)  for his contributions.
+## Contact
+For your questions:
+furkaanncetiin@gmail.com
+[LinkedIn](https://www.linkedin.com/in/furkaancetiin/)
