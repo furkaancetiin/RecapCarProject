@@ -5,10 +5,13 @@
 RecapCarProject (RentACar) is a car rental project where I use C# in the Backend and Angular in the Frontend, and I use advanced techniques such as OOP and AOP.
 
 ## Table of contents
-* [General info](#general-info)
-* [Technologies](#technologies)
+* [General Info](#general-info)
 * [Setup](#setup)
+* [Usage](#usage)
+* [Technologies Used](#technologies-used)
 
+## General Info
+The project consists of 6 layers: Core, Entities, DataAccess, Business, Console UI and WebAPI. Developed with .Net Core 3.1 library.
 ## Setup
 
  - Press the `Win+R` " keys on your keyboard. Type `cmd` in the window
@@ -33,6 +36,18 @@ RecapCarProject (RentACar) is a car rental project where I use C# in the Backend
 cd DataAccess
 dotnet ef database update
 ``` 
+
+## Usage
+
+ - Right click on the  `WebAPI`  project (layer) from the  `Solution Explorer`  and select  `Set as Startup Project`
+ -  Start the project with  `IIS Express`  in Visual Studio. On the page that opens, type `swagger` after `https://localhost:44306/`. Your screen should look like the picture.
+ 
+	   <img src=" https://i.ibb.co/fXRVzwc/Swagger.png"  width="600"  height="200">
+ - -Let's make an example.
+ - Under the Brands heading, click on `GET /api/brands/getbyid`. Then click the `Try it out` button. Please enter `id` available in our table. Click the `Execute` button. Congratulations, our method worked!
+ 
+	  <img src="https://i.ibb.co/6BmnW7b/VS.png"  width="600"  height="200">
+
 
  ## Technologies Used
 
