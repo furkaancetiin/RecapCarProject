@@ -40,7 +40,7 @@ dotnet ef database update
  - Right click on the  `WebAPI`  project (layer) from the  `Solution Explorer`  and select  `Set as Startup Project`
  -  Start the project with  `IIS Express`  in Visual Studio. On the page that opens, type `swagger` after `https://localhost:44306/`. Your screen should look like the picture.
  
-	   <img src=" https://i.ibb.co/fXRVzwc/Swagger.png"  width="600"  height="200">
+	   <img src="https://i.ibb.co/1Mv4R6t/Swagger1.png"  width="600"  height="200">
  - -Let's make an example.
  - Under the Brands heading, click on `GET /api/brands/getbyid`. Then click the `Try it out` button. Please enter `id` available in our table. Click the `Execute` button. Congratulations, our method worked!
  
