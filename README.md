@@ -1,5 +1,3 @@
-**
-
 # RecapCarProject
 
 RecapCarProject (RentACar) is a car rental project where I use C# in the Backend and Angular in the Frontend, and I use advanced techniques such as OOP and AOP.
