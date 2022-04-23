@@ -12,7 +12,7 @@ RecapCarProject (RentACar) is a car rental project where I use C# in the Backend
 * [Contributions](#contributions)
 * [Contact](#contact)
 ## General Info
-The project consists of 6 layers: Core, Entities, DataAccess, Business, Console UI and WebAPI. Developed with .Net Core 3.1 library.
+The project consists of 6 layers: Core, Entities, DataAccess, Business, Console UI and WebAPI. Developed with .Net Core 3.1.
 ## Setup
 
  - Press the `Win+R` " keys on your keyboard. Type `cmd` in the window
